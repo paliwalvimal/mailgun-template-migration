@@ -2,10 +2,10 @@
 
 Migrate mailgun email templates from one domain to another
 
-## Licence:
+## License:
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-MIT Licence. See [Licence](LICENCE) for full details.
+MIT License. See [Licence](LICENCE) for full details.
 
 ### Usage:
  - Set required environment variables
