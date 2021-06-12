@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/github/license/paliwalvimal/mailgun-template-migration?style=for-the-badge) ![CodeQL](https://img.shields.io/github/workflow/status/paliwalvimal/mailgun-template-migration/codeql/main?label=CodeQL&style=for-the-badge) ![Commit](https://img.shields.io/github/last-commit/paliwalvimal/mailgun-template-migration?style=for-the-badge) ![Release](https://img.shields.io/github/v/release/paliwalvimal/mailgun-template-migration?style=for-the-badge)
 
-Migrate mailgun email templates from one domain to another
+Migrate mailgun email templates from one domain to another within the account
 
 ### Usage:
  - Set required environment variables
@@ -18,5 +18,5 @@ MG_API_KEY='xxxxxxxxxx'                     # Mailgun API Key
 
 ### Command:
 ```bash
-python3 mailgun-template-migration.py {copy|move}
+python3 mailgun-template-migration.py [copy | move]
 ```
