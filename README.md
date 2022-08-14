@@ -24,7 +24,6 @@ MG_API_KEY='xxxxxxxxxx'                     # Mailgun API Key
 https://documentation.mailgun.com/en/latest/api-templates.html
 ```
 
-
 ### Command:
 ```bash
 python3 mailgun-template-migration.py [copy | move]
