@@ -35,6 +35,15 @@ def mail_domain_resolver(env: Env) -> str:
             Env.PROD: MG_PROD_MAIL_DOMAIN}.get(env)
 
 
+def delete_template_in_domain(template: FullTemplate, env_to_copy: Env):
+    response = requests.delete(f'{MG_BASE_URL}/{mail_domain_resolver(env_to_copy)}/templates/{template.name}',
+                               auth=('api', MG_API_KEY))
+    if response.status_code != http.HTTPStatus.OK:
+        logger.error(f" template {template.name} cannot be deleted from {env_to_copy.name} environment")
+    else:
+        logger.info(f" template {template.name} deleted successfully in {env_to_copy.name} environment")
+
+
 def create_template_in_domain(template: FullTemplate, env_to_copy: Env):
     response = requests.post(f'{MG_BASE_URL}/{mail_domain_resolver(env_to_copy)}/templates', auth=('api', MG_API_KEY),
                              data={'name': template.name, 'description': template.description,
@@ -42,6 +51,8 @@ def create_template_in_domain(template: FullTemplate, env_to_copy: Env):
                                    'tag': datetime.now().strftime('%Y-%m-%d_%H-%M')})
     if response.status_code != http.HTTPStatus.OK:
         logger.error(f" template {template.name} cannot be stored in {env_to_copy.name} environment")
+        delete_template_in_domain(template, env_to_copy)
+        create_template_in_domain(template, env_to_copy)
     else:
         logger.info(f" template {template.name} stored successfully in {env_to_copy.name} environment")
 
@@ -59,7 +70,7 @@ def get_all_templates() -> List[FullTemplate]:
         full_response = requests.get(f"{MG_BASE_URL}/{MG_TEMPLATES_DOMAIN}/templates/{base_template.name}",
                                      auth=('api', MG_API_KEY),
                                      params={'active': 'yes'})
-        if response.status_code != http.HTTPStatus.OK:
+        if full_response.status_code != http.HTTPStatus.OK:
             logger.error(f" template {template.name} cannot be fully retrieved")
         else:
             templates.append(FullTemplate(**full_response.json()["template"]))
