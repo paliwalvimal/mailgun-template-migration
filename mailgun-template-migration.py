@@ -54,7 +54,7 @@ def create_template_in_domain(template: FullTemplate, env_to_copy: Env):
         delete_template_in_domain(template, env_to_copy)
         create_template_in_domain(template, env_to_copy)
     else:
-        logger.info(f" template {template.name} stored successfully in {env_to_copy.name} environment")
+        logger.info(f" template {template.name} from={template.version.createdAt} stored successfully in {env_to_copy.name} environment")
 
 
 def get_all_templates() -> List[FullTemplate]:
